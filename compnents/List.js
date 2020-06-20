@@ -60,14 +60,15 @@ class List extends Component {
   };
 
   reset = () => {
-    this.setState({ tasks: [] });
-    AsyncStorage.setItem(
-      "taskkey",
-      JSON.stringify(this.state.tasks),
-      (err, res) => {
-        if (err) console.log(err);
-      }
-    );
+    this.setState({ tasks: [] }, () => {
+      AsyncStorage.setItem(
+        "taskkey",
+        JSON.stringify(this.state.tasks),
+        (err, res) => {
+          if (err) console.log(err);
+        }
+      );
+    });
   };
 
   componentDidMount() {

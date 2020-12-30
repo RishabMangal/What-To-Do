@@ -6,13 +6,13 @@ import {
   TextInput,
   FlatList,
   Button,
-  AsyncStorage,
   Image,
   ScrollView,
   Alert,
   TouchableOpacity,
 } from "react-native";
-import s, { styles } from "./styles";
+import AsyncStorage from "@react-native-community/async-storage";
+import { styles } from "./styles";
 import Footer from "./Footer";
 
 class List extends Component {
@@ -33,49 +33,42 @@ class List extends Component {
           tasks: [...this.state.tasks, this.state.task],
           task: "",
         },
-        () => {
-          AsyncStorage.setItem(
-            "taskkey",
-            JSON.stringify(this.state.tasks),
-            (err, res) => {
-              if (err) console.log(err);
-            }
-          );
+
+        async () => {
+          try {
+            await AsyncStorage.setItem(
+              "taskkey",
+              JSON.stringify(this.state.tasks)
+            );
+          } catch (err) {
+            console.log("Error in addTask: ", err);
+          }
         }
       );
     }
   };
 
-  deleteItem = (i) => {
+  deleteItem = async (i) => {
     // playDeleteSound();
     if (i > -1) this.state.tasks.splice(i, 1);
     this.setState({ tasks: this.state.tasks });
-    AsyncStorage.setItem(
-      "taskkey",
-      JSON.stringify(this.state.tasks),
-      (err, res) => {
-        if (err) console.log(err);
-      }
-    );
+    try {
+      await AsyncStorage.setItem("taskkey", JSON.stringify(this.state.tasks));
+    } catch (err) {
+      console.log("Error in Deleting item: ", err);
+    }
   };
 
   reset = () => {
-    this.setState({ tasks: [] }, () => {
-      AsyncStorage.setItem(
-        "taskkey",
-        JSON.stringify(this.state.tasks),
-        (err, res) => {
-          if (err) console.log(err);
-        }
-      );
+    this.setState({ tasks: [] }, async () => {
+      await AsyncStorage.setItem("taskkey", JSON.stringify(this.state.tasks));
     });
   };
 
-  componentDidMount() {
-    AsyncStorage.getItem("taskkey", (err, res) => {
-      console.log(JSON.parse(res));
+  async componentDidMount() {
+    const res = await AsyncStorage.getItem("taskkey");
+    if (res)
       this.setState({ tasks: [...JSON.parse(res), ...this.state.tasks] });
-    });
   }
   static navigationOptions = {
     header: null,
@@ -83,25 +76,17 @@ class List extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Text style={[s.bgDark, styles.heading, styles.p5, styles.mT10]}>
+        <Text style={[styles.bgDark, styles.heading, styles.p5, styles.mT10]}>
           Stop When You Are{" "}
-          <Text style={[s.textPrimary, s.fontWeightBold, { fontSize: 30 }]}>
-            Done..!
-          </Text>{" "}
+          <Text style={[styles.textPrimary, { fontSize: 30 }]}>Done..!</Text>{" "}
         </Text>
         <TextInput
           placeholder="Enter Task..."
           onChangeText={(text) => this.setState({ task: text })}
-          style={[
-            styles.p3,
-            styles.m3,
-            styles.mY5,
-            s.bgDark,
-            { color: "white" },
-          ]}
+          style={[styles.p3, styles.m3, styles.mY5, { color: "white" }]}
           value={this.state.task}
         ></TextInput>
-        <View style={[s.container, styles.mB5]}>
+        <View style={[styles.mB5]}>
           <Button onPress={this.addTask} title="Add Task"></Button>
         </View>
         {this.state.tasks.length ? (
@@ -111,12 +96,11 @@ class List extends Component {
               <TouchableOpacity onPress={() => this.deleteItem(index)}>
                 <Text
                   style={[
+                    styles.textLight,
+                    styles.bgDark,
                     styles.m1,
                     styles.p1,
-                    s.bgDark,
-                    s.textLight,
                     styles.text20,
-                    styles.textCursive,
                   ]}
                 >
                   {" "}
@@ -129,16 +113,7 @@ class List extends Component {
         ) : (
           <View style={[styles.center, styles.container]}>
             <Image source={smiley} style={styles.imgSmall}></Image>
-            <Text
-              style={[
-                styles.mY20,
-                styles.p5,
-                s.textSuccess,
-                styles.text20,
-                styles.textCursive,
-                s.border,
-              ]}
-            >
+            <Text style={[styles.mY20, styles.p5, styles.text20]}>
               Yay..! Nothing To Do...
             </Text>
           </View>

@@ -1,40 +1,16 @@
 import { StyleSheet } from "react-native";
-import BootstrapStyleSheet from "react-native-bootstrap-styles";
-
-// const BootstrapStyleSheet = require('react-native-bootstrap-styles');
-
-const BODY_COLOR = "#000022",
-  TEXT_MUTED = "#888888";
-
-// custom constants
-const constants = {
-  BODY_COLOR,
-  TEXT_MUTED,
-};
-
-// custom classes
-const classes = {
-  title: {
-    color: "red",
-  },
-};
-// let styles = {};
-const bootstrapStyleSheet = new BootstrapStyleSheet(constants, classes);
-export const s = bootstrapStyleSheet.create();
-export const c = bootstrapStyleSheet.constants;
-
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width:"100%"
-    },
-    imgSmall: {
-        // flex: 1,
-        height: 200,
-        width: 200,
-        // padding: 100,
-    },
-  center: { alignItems: "center", justifyContent: "center"},
+    width: "100%",
+  },
+  imgSmall: {
+    //flex:1,
+    height: 200,
+    width: 200,
+    //padding:100,
+  },
+  center: { alignItems: "center", justifyContent: "center" },
   bottom: {
     position: "absolute",
     bottom: 0,
@@ -44,102 +20,38 @@ export const styles = StyleSheet.create({
   text30: { fontSize: 30 },
   text40: { fontSize: 40 },
   textCursive: { fontFamily: "" },
-  m0: {
-    margin: 0,
-  },
-  m1: {
-    margin: "1%",
-  },
-  m2: {
-    margin: "2%",
-  },
-  m3: {
-    margin: "3%",
-  },
-  m4: {
-    margin: "4%",
-  },
-  m5: {
-    margin: "5%",
-  },
-  m10: {
-    margin: "10%",
-  },
-  m15: {
-    margin: "15%",
-  },
-  m20: {
-    margin: "20%",
-  },
-  mL0: {
-    marginLeft: 0,
-  },
-  mL1: {
-    marginLeft: "1%",
-  },
-  mL2: {
-    marginLeft: "2%",
-  },
-  mL3: {
-    marginLeft: "3%",
-  },
-  mL4: {
-    marginLeft: "4%",
-  },
-  mL5: {
-    marginLeft: "5%",
-  },
-  mL10: {
-    marginLeft: "10%",
-  },
-  mL15: {
-    marginLeft: "15%",
-  },
-  mL20: {
-    marginLeft: "20%",
-  },
-  mR0: {
-    marginRight: 0,
-  },
-  mR1: {
-    marginRight: "1%",
-  },
-  mR2: {
-    marginRight: "2%",
-  },
-  mR3: {
-    marginRight: "3%",
-  },
-  mR4: {
-    marginRight: "4%",
-  },
-  mR5: {
-    marginRight: "5%",
-  },
-  mR10: {
-    marginRight: "10%",
-  },
-  mR15: {
-    marginRight: "15%",
-  },
-  mR20: {
-    marginRight: "20%",
-  },
-  mT0: {
-    marginTop: 0,
-  },
-  mT1: {
-    marginTop: "1%",
-  },
-  mT2: {
-    marginTop: "2%",
-  },
-  mT3: {
-    marginTop: "3%",
-  },
-  mT4: {
-    marginTop: "4%",
-  },
+  m0: { margin: 0 },
+  m1: { margin: "1%" },
+  m2: { margin: "2%" },
+  m3: { margin: "3%" },
+  m4: { margin: "4%" },
+  m5: { margin: "5%" },
+  m10: { margin: "10%" },
+  m15: { margin: "15%" },
+  m20: { margin: "20%" },
+  mL0: { marginLeft: 0 },
+  mL1: { marginLeft: "1%" },
+  mL2: { marginLeft: "2%" },
+  mL3: { marginLeft: "3%" },
+  mL4: { marginLeft: "4%" },
+  mL5: { marginLeft: "5%" },
+  mL10: { marginLeft: "10%" },
+  mL15: { marginLeft: "15%" },
+  mL20: { marginLeft: "20%" },
+  mR0: { marginRight: 0 },
+  mR1: { marginRight: "1%" },
+  mR2: { marginRight: "2%" },
+  mR3: { marginRight: "3%" },
+  mR4: { marginRight: "4%" },
+  mR5: { marginRight: "5%" },
+  mR10: { marginRight: "10%" },
+  mR15: { marginRight: "15%" },
+  mR20: { marginRight: "20%" },
+  mT0: { marginTop: 0 },
+  mT1: { marginTop: "1%" },
+  mT2: { marginTop: "2%" },
+  mT3: { marginTop: "3%" },
+  mT4: { marginTop: "4%" },
   mT5: {
     marginTop: "5%",
   },
@@ -475,7 +387,20 @@ export const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "blue",
   },
+  textCursive:{fontFamily:"cursive"},
+  textBold: {fontWeight:"600"},
+  textLight: {fontWeight:"100"},
+  textCenter: { textAlign: "center" },
+  textRight:{textAlign:"right"},
+  textLeft:{textAlign:"left"},
+  textDark:{color: "#383838"},
+  textLight:{color: "#f1f1f1"},
+  textPrimary:{color: "#166cff"},
+  textWarning:{color: "yellow"},
+  textSuccess:{color: "green"},
+  textDanger:{color: "red"},
+  bgDark:{backgroundColor: "#383838"},
+  bgPrimary:{backgroundColor: "#166cff"},
 });
 
-export default s;
-// export default c;
+export default styles;
